@@ -1,0 +1,12 @@
+div, header, article {
+    border: solid 1px;
+}
+
+.blogHeader {
+    padding-left: 50px;
+}
+
+.blogPost {
+    width: 80%;
+    margin: auto;
+}

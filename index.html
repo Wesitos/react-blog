@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <script src="http://fb.me/react-with-addons-0.12.0.js"></script>
+        <script src="http://fb.me/JSXTransformer-0.12.0.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+        <script src="main.jsx" type="text/jsx"></script>
+        <link rel="stylesheet" type="text/css" href="main.css"/>
+        <title>Le Blag</title>
+    </head>
+    <body>
+        <div id="container"></div>
+
+        <script type="text/jsx">
+         var request = new XMLHttpRequest();
+         request.open('GET', 'data.json', true);
+         request.onload = function() {
+             if (this.status >= 200 && this.status < 400){
+                 var data = JSON.parse(this.response);
+                 var container = document.getElementById("container");
+                 React.render(<Blag data={data}/>, container);
+             };
+         };
+         request.send();
+        </script>
+    </body>
+</html>

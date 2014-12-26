@@ -1,0 +1,21 @@
+{
+    "blog": {
+        "titulo": "Blag",
+        "subtitulo": "Something, something, something complete"
+    },
+    "posts": [
+        {
+            "header": {
+                "fecha": "2014-12-8",
+                "titulo": "Titulo Ejemplo",
+                "autor": {
+                    "id": 1,
+                    "nombre": "Pedro Palacios Avila",
+                    "nickname": "Wesitos",
+                    "url": "http://github.com/wesitos"
+                }
+            },
+            "content": "Texto de ejemplo"
+        }
+    ]
+}
