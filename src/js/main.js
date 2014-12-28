@@ -32,7 +32,7 @@ var BlogHeader = React.createClass({
 var PostsList = React.createClass({
     render: function(){
         var listaPosts = this.props.data.map(function(postProps){
-            return <Post data={postProps} />;
+            return <Post data={postProps} resumido={true}/>;
         });
         return(
             <section>
@@ -43,13 +43,19 @@ var PostsList = React.createClass({
 });
 
 var Post = React.createClass({
+    getDefaultProps: function(){
+        return{
+            resumido: false
+        };
+    },
     render: function(){
         var headerProps = this.props.data.header;
         var contentData = this.props.data.content;
+        var resumido = this.props.resumido;
         return (
             <article className="blogPost">
                 <PostHeader {...headerProps}/>
-                <PostContent data={contentData}/>
+                <PostContent data={contentData} resumido={resumido}/>
             </article>
         );
     }
@@ -72,10 +78,25 @@ var PostHeader = React.createClass({
 });
 
 var PostContent = React.createClass({
+    getDefaultProps: function(){
+        return {
+            palabrasResumen: 100
+        };
+    },
     render: function(){
         var postText = MarkdownConverter.makeHtml(this.props.data);
+        var acortarTexto = false;
+        if (this.props.resumido){
+            var listaPalabras = postText.split(" ");
+            var cuentaPalabras = listaPalabras.length;
+            if (cuentaPalabras > this.props.palabrasResumen){
+                acortarTexto = true;
+            };
+        };
         return(
-            <section dangerouslySetInnerHTML={{__html:postText}}></section>
+            <section dangerouslySetInnerHTML={
+                     {__html:acortarTexto?postText.split("<p>").slice(0,2).join("<p>"):postText}}>
+            </section>
         );
     }
 });
