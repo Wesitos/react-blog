@@ -1,7 +1,14 @@
 {
-  "name": "blag",
+  "name": "react-blog",
   "version": "0.0.0",
   "author": "Pedro Palacios",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/wesitos/react-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wesitos/react-blog/issues"
+  },
   "dependencies": {
     "aliasify": "^1.5.1",
     "browserify": "^8.0.2",
@@ -11,15 +18,16 @@
     "react": "^0.12.2",
     "react-tools": "^0.12.2",
     "reactify": "^0.17.1",
+    "showdown": "^0.3.1",
     "vinyl-source-stream": "^1.0.0"
   },
   "scripts": {
     "gulp": "gulp"
   },
-    "aliasify": {
-        "aliases": {
-            "react": "react/addons",
-            "react/addons": "react/addons"
-        }
+  "aliasify": {
+    "aliases": {
+      "react": "react/addons",
+      "react/addons": "react/addons"
     }
+  }
 }
