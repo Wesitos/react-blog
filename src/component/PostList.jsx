@@ -1,7 +1,7 @@
-React = require('react/addons');
+'use-strict';
 Post = require('./Post.jsx');
 
-var PostsList = React.createClass({
+var PostList = React.createClass({
     render: function(){
         var listaPosts = this.props.data.map(function(postProps){
             return <Post data={postProps} resumido={true}/>;

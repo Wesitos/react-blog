@@ -10,10 +10,9 @@ var Blag = React.createClass({
         return(
             <div>
                 <BlogHeader {...data.blog}/>
-                <PostsList data={data.posts}/>
+                <PostList data={data.posts}/>
             </div>
         );
     }
 });
-
 module.exports = Blag;

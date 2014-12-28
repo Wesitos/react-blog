@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "author": "Pedro Palacios",
   "dependencies": {
+    "aliasify": "^1.5.1",
     "browserify": "^8.0.2",
     "del": "^1.1.1",
     "express": "^4.10.6",
@@ -14,5 +15,11 @@
   },
   "scripts": {
     "gulp": "gulp"
-  }
+  },
+    "aliasify": {
+        "aliases": {
+            "react": "react/addons",
+            "react/addons": "react/addons"
+        }
+    }
 }

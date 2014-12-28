@@ -1,4 +1,4 @@
-React = require('react/addons');
+'use-strict'
 PostHeader = require('./PostHeader.jsx');
 PostContent = require('./PostContent.jsx');
 
@@ -20,3 +20,5 @@ var Post = React.createClass({
         );
     }
 });
+
+module.exports = Post

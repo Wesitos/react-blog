@@ -1,4 +1,4 @@
-React = require('react/addons');
+'user-strict';
 AutorLabel  = require('./AutorLabel.jsx');
 PostDate = require('./PostDate.jsx');
 
@@ -17,3 +17,4 @@ var PostHeader = React.createClass({
         );
     }
 });
+module.exports = PostHeader;

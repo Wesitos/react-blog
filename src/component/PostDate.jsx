@@ -1,5 +1,4 @@
 'user strict';
-React = require('react/addons');
 
 var PostDate = React.createClass({
     render: function(){

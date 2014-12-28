@@ -13,14 +13,14 @@ var appBuildDir = "./build/js/";
 
 var componentDir = "./src/component/"
 var componentPaths = fs.readdirSync(componentDir);
+var componentBuildDir = "./build/js/";
 
 var vendorDir = "./build/js/vendor/"
 var vendorModules = [
-    ["react/addons", "react-with-addons.js"],
-    ["react", "react.js"]
+    ["react/addons", "react-with-addons.js"]
 ];
 
-// Cs
+// Css
 var cssDir = './src/css/';
 var cssPaths = fs.readdirSync(cssDir).map(function(item){return './' + path.join(cssDir, item)});
 var cssBuildDir = './build/css/';
@@ -31,6 +31,7 @@ gulp.task('clean', function(done){
 
 gulp.task('browserify', ['clean'], function(){
     // Bundle vendor modules
+
     vendorModules.forEach(function(item){
         var b = browserify();
         b.require(item[0])
@@ -38,14 +39,21 @@ gulp.task('browserify', ['clean'], function(){
             .pipe(source(item[1]))
             .pipe(gulp.dest(vendorDir));
     });
-    
+    // Bundle react-components
+    componentPaths.forEach(function(src){
+        var b = browserify();
+        b.transform(reactify);
+        b.external(vendorModules.map(function(item){return item[0]}));
+        b.require("./" + path.join(componentDir, src));
+        b.bundle();
+    });
     //Bundle apps
     appPaths.forEach(function(src){
         var b = browserify();
         b.transform(reactify);
         b.external(vendorModules.map(function(item){return item[0]}));
         b.add("./" + path.join(appDir, src));
-        return b.bundle()
+        b.bundle()
             .pipe(source(src.split(".")[0] + '.js'))
             .pipe(gulp.dest(appBuildDir));
     });
