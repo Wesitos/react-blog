@@ -6,6 +6,7 @@ var source = require('vinyl-source-stream');
 var fs = require('fs');
 var path = require('path');
 
+// Scripts
 var appDir = "./src/app/";
 var appPaths = fs.readdirSync(appDir);
 var appBuildDir = "./build/js/";
@@ -19,7 +20,16 @@ var vendorModules = [
     ["react", "react.js"]
 ];
 
-gulp.task('browserify', function(){
+// Cs
+var cssDir = './src/css/';
+var cssPaths = fs.readdirSync(cssDir).map(function(item){return './' + path.join(cssDir, item)});
+var cssBuildDir = './build/css/';
+
+gulp.task('clean', function(done){
+    del(['build'], done);
+});
+
+gulp.task('browserify', ['clean'], function(){
     // Bundle vendor modules
     vendorModules.forEach(function(item){
         var b = browserify();
@@ -35,10 +45,15 @@ gulp.task('browserify', function(){
         b.transform(reactify);
         b.external(vendorModules.map(function(item){return item[0]}));
         b.add("./" + path.join(appDir, src));
-        b.bundle()
+        return b.bundle()
             .pipe(source(src.split(".")[0] + '.js'))
             .pipe(gulp.dest(appBuildDir));
     });
 });
 
-gulp.task('default', ['browserify']);
+gulp.task ('css', ['clean'], function(){
+    return gulp.src(cssPaths)
+    .pipe(gulp.dest(cssBuildDir));
+});
+
+gulp.task('default', ['browserify', 'css']);
