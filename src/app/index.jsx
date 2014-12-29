@@ -1,7 +1,6 @@
 'use-strict';
 Blag = require('../component/Blag.jsx');
-console.log(<Blag/>);
-console.log(React);
+
 var request = new XMLHttpRequest();
 request.open('GET', 'data.json', true);
 request.onload = function() {
