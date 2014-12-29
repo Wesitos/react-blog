@@ -6,8 +6,7 @@ var source = require('vinyl-source-stream');
 var fs = require('fs');
 var path = require('path');
 var preen = require('preen');
-var rename = require('gulp-rename');
-var uglify = require('gulp-uglify');
+var plugins = require('gulp-load-plugins')();
 var gutil = require('gulp-util');
 
 var config = { production: false };
@@ -21,19 +20,18 @@ var componentDir = "./src/component/"
 var componentPaths = fs.readdirSync(componentDir);
 var componentBuildDir = "./build/js/";
 
-var vendorDir = "./build/js/vendor/"
+var vendorDir = "./build/js/";
+var vendorFileName = "vendor.js";
 var vendorModules = [
     {
         bowerName: "react",
         devSource: "react-with-addons.js",
-        prodSource: "react-with-addons-min.js",
-        destName: "react-with-addons"
+        prodSource: "react-with-addons.min.js",
     },
     {
         bowerName: "showdown",
         devSource: "src/showdown.js",
         prodSource: "compressed/showdown.js",
-        destName: "showdown.js"
     }
 ];
 
@@ -44,6 +42,7 @@ var cssBuildDir = './build/css/';
 
 gulp.task('set-production', function(done){
     config.production = true;
+    gutil.log("Produccion!");
     done();
 });
 
@@ -55,28 +54,30 @@ gulp.task('preen', ['clean'], function(done){
     preen.preen({}, done);
 });
 
-gulp.task('copy-vendor', ['preen'], function(){
+gulp.task('vendor', ['preen'], function(){
     var vendorPathList = vendorModules.map(function(item){
         var moduleName = config.production?item.prodSource:item.devSource;
         var modulePath = path.join("bower_components", item.bowerName ,moduleName);
         return modulePath
     });
     return gulp.src(vendorPathList, {base: "bower_components"})
-        .pipe(rename(function(filePath){
-            filePath.dirname = "";
-        }))
-        .pipe(gulp.dest(vendorDir));
+        .pipe(plugins.concat(vendorFileName))
+        .pipe(config.production ? plugins.uglify() : gutil.noop())
+        .pipe(gulp.dest(vendorDir))
+        .on('error', gutil.log);
 });
 
-gulp.task('browserify',  ['copy-vendor'], function(){
+gulp.task('browserify',  ['vendor'], function(){
     //Bundle apps
     appPaths.forEach(function(src){
         b = browserify();
         b.transform(reactify);
+        if (config.production) b.transform('uglifyify');
         b.add("./" + path.join(appDir, src));
         b.bundle()
             .pipe(source(src.split(".")[0] + '.js'))
             .pipe(gulp.dest(appBuildDir))
+            .on('error', gutil.log);
     });
     
 });
@@ -90,4 +91,4 @@ gulp.task ('css', ['browserify'], function(){
 gulp.task('deploy', ['set-production', 'default']);
 
 // Por defecto, desarrollo
-gulp.task('default', ['copy-vendor', 'browserify', 'css']);
+gulp.task('default', ['vendor', 'browserify', 'css']);
