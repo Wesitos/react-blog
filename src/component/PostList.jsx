@@ -1,5 +1,5 @@
 'use-strict';
-Post = require('./Post.jsx');
+var Post = require('./Post.jsx');
 
 var PostList = React.createClass({
     render: function(){

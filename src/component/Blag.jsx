@@ -1,8 +1,7 @@
-'user strict';
+'use-strict';
 
-React = require('react/addons');
-BlogHeader = require('./BlogHeader.jsx');
-PostList = require('./PostList.jsx');
+var BlogHeader = require('./BlogHeader.jsx');
+var PostList = require('./PostList.jsx');
 
 var Blag = React.createClass({
     render: function(){

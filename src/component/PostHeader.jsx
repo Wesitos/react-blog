@@ -1,6 +1,6 @@
-'user-strict';
-AutorLabel  = require('./AutorLabel.jsx');
-PostDate = require('./PostDate.jsx');
+'use-strict';
+var AutorLabel  = require('./AutorLabel.jsx');
+var PostDate = require('./PostDate.jsx');
 
 var PostHeader = React.createClass({
     render: function(){

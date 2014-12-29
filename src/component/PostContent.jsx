@@ -1,5 +1,4 @@
 'use-strict';
-
 var MarkdownConverter = new Showdown.converter();
 
 var PostContent = React.createClass({

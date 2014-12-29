@@ -1,5 +1,4 @@
 'use-strict';
-React = require('react/addons');
 
 var AutorLabel = React.createClass({
     render: function(){

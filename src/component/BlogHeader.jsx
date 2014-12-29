@@ -1,5 +1,4 @@
 'use-strict';
-React = require('react/addons');
 
 var BlogHeader = React.createClass({
     render: function(){
