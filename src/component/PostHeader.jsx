@@ -4,14 +4,18 @@ var PostDate = require('./PostDate.jsx');
 
 var PostHeader = React.createClass({
     render: function(){
-        var autor = this.props.autor;
+        var postData = this.props.postData;
+        var meta = postData.meta;
+        var titulo = meta.titulo;
+        var autor = meta.autor;
+        var fecha = meta.fecha;
         return(
             <header>
-                <h2>{this.props.titulo}</h2>
+                <h2>{titulo}</h2>
                 <p> {"por "}
                     <AutorLabel autor={autor}/>
                     {" el "}
-                    <PostDate fecha={this.props.fecha}/>
+                    <PostDate fecha={fecha}/>
                 </p>
             </header>
         );

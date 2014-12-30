@@ -9,16 +9,15 @@ var Post = React.createClass({
         };
     },
     render: function(){
-        var headerProps = this.props.data.header;
-        var contentData = this.props.data.content;
+        var postData = this.props.data;
         var resumido = this.props.resumido;
         return (
             <article className="blogPost">
-                <PostHeader {...headerProps}/>
-                <PostContent data={contentData} resumido={resumido}/>
+                <PostHeader postData={postData}/>
+                <PostContent postData={postData} resumido={resumido}/>
             </article>
         );
     }
 });
 
-module.exports = Post
+module.exports = Post;
