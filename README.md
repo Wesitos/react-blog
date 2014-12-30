@@ -43,7 +43,7 @@ Un componente de react por archivo en `src/component`. Los componentes se refere
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="static/js/vendor/react-with-addons.js" />
+        <script src="static/js/vendor/vendor.js" />
         <script src="/static/js/index.js" />
     </head>
     <body></body>
@@ -56,7 +56,7 @@ $ npm install
 ```
 Para construir.
 ``` bash
-$ npm run gulp
+$ npm run build
 ```
 Para ejecutar
 ``` bash
