@@ -26,7 +26,8 @@
     "vinyl-source-stream": "^1.0.0"
   },
   "scripts": {
-    "gulp": "gulp"
+    "build": "gulp",
+    "deploy": "gulp deploy"
   },
   "devDependencies": {
     "gulp-load-plugins": "^0.8.0"
