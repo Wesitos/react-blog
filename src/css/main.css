@@ -1,12 +1,40 @@
-div, header, article {
-    border: solid 1px;
+a {
+    color: black;
+    text-decoration: none;
 }
 
-.blogHeader {
-    padding-left: 50px;
+p {
+    margin: 0 0 0 0;
+}
+.shadow {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.20);
+}
+
+#blogHeader {
+    width: 80%;
+    margin: auto;
+    padding: 10px 50px 10px;
+}
+
+#blogPostList {
+    width: 80%;
+    margin: 10 auto 20 auto;
+    padding: 30px 20px 50px 20px;
 }
 
 .blogPost {
-    width: 80%;
-    margin: auto;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.blogPostHeader {
+    margin: auto 20px 20px;
+}
+
+.blogPostcontent {
+    margin-left: 50px;
+}
+
+.blogVerMasButton {
+    
 }
