@@ -3,6 +3,7 @@
         "titulo": "Blag",
         "subtitulo": "Something, something, something complete"
     },
+    "page": "main",
     "posts": [
         {
             "meta": {
