@@ -41,19 +41,23 @@ var PostContent = React.createClass({
                 acortarTexto = true;
             };
         };
+        var PostArticle = (
+            <article
+                className="blogPostText"
+                dangerouslySetInnerHTML={
+                {__html:acortarTexto?postText.split("<p>").slice(0,2).join("<p>"):postText}}
+                >
+            </article>
+        );
+        var Boton = (
+            <VerMasButton postMeta={postMeta}
+                          onClickCallback={this.verMasCallback}
+                          />
+        );
         return(
-            <section>
-                <article 
-                    className="PostContent"
-                    dangerouslySetInnerHTML={
-                    {__html:acortarTexto?postText.split("<p>").slice(0,2).join("<p>"):postText}}
-                    >
-                </article>
-                {/* Boton Ver mas*/}
-                <VerMasButton postMeta={postMeta}
-                              resumido={resumido}
-                              onClickCallback={this.verMasCallback}
-                                        />
+            <section className="blogPostContent">
+                {PostArticle}
+                {acortarTexto?Boton:undefined}
             </section>
         );
     }
