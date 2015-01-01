@@ -15,6 +15,7 @@ var Post = React.createClass({
             <article className="blogPost">
                 <PostHeader postData={postData}/>
                 <PostContent postData={postData} resumido={resumido}/>
+                <hr/>
             </article>
         );
     }
