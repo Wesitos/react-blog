@@ -24,7 +24,7 @@ var Blag = React.createClass({
         return(
             <div>
                 <BlogHeader {...data.blog}/>
-                <PostList data={data.posts}/>
+                <PostList data={data}/>
             </div>
         );
     }
