@@ -18,7 +18,6 @@ var PostContent = React.createClass({
     compiledText: "",
 
     verMasCallback: function(event){
-        console.log("click");
         this.setState({resumido: false});
     },
 
