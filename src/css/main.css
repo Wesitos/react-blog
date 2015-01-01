@@ -41,5 +41,6 @@ p {
 }
 
 .blogVerMasButton {
-    
+    color: blue;
+    cursor: pointer;
 }
