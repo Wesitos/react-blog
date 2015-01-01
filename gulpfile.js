@@ -46,15 +46,18 @@ gulp.task('set-production', function(done){
     done();
 });
 
-gulp.task('clean', function(done){
-    del(['build'], done);
+gulp.task('clean-css', function(done){
+    del(['build/css'], done);
 });
+gulp.task('clean-js', function(done){
+    del(['build/js'], done);
+})
 
-gulp.task('preen', ['clean'], function(done){
+gulp.task('preen', function(done){
     preen.preen({}, done);
 });
 
-gulp.task('vendor', ['preen'], function(){
+gulp.task('vendor', ['preen', 'clean-js'], function(){
     var vendorPathList = vendorModules.map(function(item){
         var moduleName = config.production?item.prodSource:item.devSource;
         var modulePath = path.join("bower_components", item.bowerName ,moduleName);
@@ -67,7 +70,7 @@ gulp.task('vendor', ['preen'], function(){
         .on('error', gutil.log);
 });
 
-gulp.task('browserify',  ['vendor'], function(){
+gulp.task('browserify', ['clean-js', 'vendor'], function(){
     //Bundle apps
     appPaths.forEach(function(src){
         b = browserify();
@@ -82,7 +85,7 @@ gulp.task('browserify',  ['vendor'], function(){
     
 });
 
-gulp.task ('css', ['browserify'], function(){
+gulp.task('css', ['clean-css'], function(){
     return gulp.src(cssPaths)
         .pipe(gulp.dest(cssBuildDir));
 });
@@ -92,3 +95,12 @@ gulp.task('deploy', ['set-production', 'default']);
 
 // Por defecto, desarrollo
 gulp.task('default', ['vendor', 'browserify', 'css']);
+
+gulp.task('watch', ['vendor', 'browserify', 'css'], function(){
+    gulp.watch('src/**/*.jsx', ['browserify']).on('change', function(event){
+        gutil.log(event.type, event.path);
+    });
+    gulp.watch('src/css/*.css', ['css']).on('change', function(event){
+        gutil.log(event.type, event.path);
+    });
+});

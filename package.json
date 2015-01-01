@@ -27,6 +27,7 @@
   },
   "scripts": {
     "build": "gulp",
+    "dev": "gulp watch",
     "deploy": "gulp deploy"
   },
   "devDependencies": {
