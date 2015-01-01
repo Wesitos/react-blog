@@ -3,8 +3,9 @@
 var AutorLabel = React.createClass({
     render: function(){
         var autor = this.props.autor;
+        var autorPageUrl = "/autor/" + autor.nickname;
         return(
-            <a href={autor.url}>{autor.nombre}</a>
+            <a href={autorPageUrl}>{autor.nombre}</a>
         );
     }
 });
