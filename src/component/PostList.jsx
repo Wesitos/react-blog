@@ -3,12 +3,20 @@ var Post = require('./Post.jsx');
 
 var PostList = React.createClass({
     render: function(){
-        var listaPosts = this.props.data.map(function(postProps){
-            return <Post data={postProps} resumido={true}/>;
+        var data = this.props.data;
+        var listaPosts = data.posts;
+        var resumido = true;
+        if (data.page == 'post')
+        { // Nos aseguramos que solo hay un elemento en la lista
+          listaPosts = [listaPosts[0]];
+          resumido = false;
+        };
+        var postDescriptors = listaPosts.map(function(postData){
+            return <Post data={postData} resumido={resumido} key={"post-" + postData.meta.id}/>;
         });
         return(
-            <section>
-                {listaPosts}
+            <section id="blogPostList" className="shadow">
+                {postDescriptors}
             </section>
         );
     }
