@@ -15,7 +15,7 @@ var PostList = React.createClass({
             return <Post data={postData} resumido={resumido} key={"post-" + postData.meta.id}/>;
         });
         return(
-            <section id="blogPostList" className="shadow">
+            <section id="blogPostList">
                 {postDescriptors}
             </section>
         );
