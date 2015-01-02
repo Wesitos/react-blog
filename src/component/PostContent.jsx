@@ -1,7 +1,7 @@
 'use-strict';
 var VerMasButton = require("./VerMasButton.jsx");
 
-var MarkdownConverter = new Showdown.converter();
+var MarkdownConverter = new Showdown.converter({extensions: ['github']});
 
 var PostContent = React.createClass({
     getDefaultProps: function(){
@@ -27,6 +27,13 @@ var PostContent = React.createClass({
         this.compiledText = MarkdownConverter.makeHtml(content);
     },
 
+    componentDidMount: function(){
+        var post = this.refs.post.getDOMNode();
+        // Seleccionamos los bloques de codigo
+        var listaBloques = post.getElementsByTagName('code');
+        for(var i=0; i< listaBloques.length;i++)
+            hljs.highlightBlock(listaBloques[i]);
+    },
     render: function(){
         var postData = this.props.postData;
         var postMeta = postData.meta;
@@ -43,6 +50,7 @@ var PostContent = React.createClass({
         var PostArticle = (
             <article
                 className="blogPostText"
+                ref="post"
                 dangerouslySetInnerHTML={
                 {__html:acortarTexto?postText.split("<p>").slice(0,2).join("<p>"):postText}}
                 >

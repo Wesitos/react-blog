@@ -23,7 +23,7 @@
             "meta": {
                 "id": 2,
                 "fecha": "2014-12-7",
-                "titulo": "Un titulo divertido",
+                "titulo": "Algo de codigo",
                 "autor": {
                     "id": 1,
                     "nombre": "Pedro Palacios Avila",
@@ -31,7 +31,7 @@
                     "url": "http://github.com/wesitos"
                 }
             },
-            "content": "Texto de ejemplo"
+            "content": "Algo de python\r\n\r\n```python\r\n\r\nprint \"Hello World\"\r\n```\r\n\r\n And some HTML\r\n\r\n```html\r\n<div>HTML!<\/div>\r\n```"
         },
         {
             "meta": {
