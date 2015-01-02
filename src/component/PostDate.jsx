@@ -6,7 +6,6 @@ var PostDate = React.createClass({
         var listaFecha = [date.getUTCDate(),
                           date.getUTCMonth(),
                           date.getUTCFullYear()];
-        console.log('fecha', date);
         var strFecha =  listaFecha.reduce(function(x,y){
             return x + "/" + y;
         });
