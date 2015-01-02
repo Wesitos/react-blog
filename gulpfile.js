@@ -32,7 +32,12 @@ var vendorModules = [
         bowerName: "showdown",
         devSource: "src/showdown.js",
         prodSource: "compressed/showdown.js",
-    }
+    },
+    {
+        bowerName: "showdown",
+        devSource: "src/extensions/github.js",
+        prodSource: "compressed/extensions/github.js",
+    },
 ];
 
 // Styles
