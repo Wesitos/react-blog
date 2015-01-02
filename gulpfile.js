@@ -35,10 +35,13 @@ var vendorModules = [
     }
 ];
 
-// Css
-var cssDir = './src/css/';
-var cssPaths = fs.readdirSync(cssDir).map(function(item){return './' + path.join(cssDir, item)});
-var cssBuildDir = './build/css/';
+// Styles
+var stylesDir ='./src/styles/';
+var stylesBuildDir = './build/css/';
+
+var cssPath = stylesDir + '**/*.css';
+var sassPath = stylesDir + '**/*.scss';
+
 
 gulp.task('set-production', function(done){
     config.production = true;
