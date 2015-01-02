@@ -26,13 +26,15 @@ var PostContent = React.createClass({
         var content = postData.content;
         this.compiledText = MarkdownConverter.makeHtml(content);
     },
-
     componentDidMount: function(){
         var post = this.refs.post.getDOMNode();
         // Seleccionamos los bloques de codigo
         var listaBloques = post.getElementsByTagName('code');
         for(var i=0; i< listaBloques.length;i++)
             hljs.highlightBlock(listaBloques[i]);
+    },
+    componentDidUpdate: function(){
+        this.componentDidMount();
     },
     render: function(){
         var postData = this.props.postData;
