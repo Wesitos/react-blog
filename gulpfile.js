@@ -86,21 +86,31 @@ gulp.task('browserify', ['clean-js', 'vendor'], function(){
 });
 
 gulp.task('css', ['clean-css'], function(){
-    return gulp.src(cssPaths)
-        .pipe(gulp.dest(cssBuildDir));
+    return gulp.src(cssPath)
+        .pipe(gulp.dest(stylesBuildDir));
 });
+gulp.task('sass', ['clean-css'], function(){
+    return gulp.src(sassPath)
+        .pipe(plugins.sass())
+        .pipe(gulp.dest(stylesBuildDir));
+});
+
+gulp.task('styles', ['css', 'sass']);
 
 // Produccion
 gulp.task('deploy', ['set-production', 'default']);
 
 // Por defecto, desarrollo
-gulp.task('default', ['vendor', 'browserify', 'css']);
+gulp.task('default', ['vendor', 'browserify', 'styles']);
 
-gulp.task('watch', ['vendor', 'browserify', 'css'], function(){
+gulp.task('watch', ['vendor', 'browserify', 'styles'], function(){
     gulp.watch('src/**/*.jsx', ['browserify']).on('change', function(event){
         gutil.log(event.type, event.path);
     });
-    gulp.watch('src/css/*.css', ['css']).on('change', function(event){
+    gulp.watch(cssPath, ['css']).on('change', function(event){
+        gutil.log(event.type, event.path);
+    });
+    gulp.watch(sassPath, ['sass']).on('change', function(event){
         gutil.log(event.type, event.path);
     });
 });
