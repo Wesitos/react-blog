@@ -24,11 +24,6 @@ var vendorDir = "./build/js/";
 var vendorFileName = "vendor.js";
 var vendorModules = [
     {
-        bowerName: "react",
-        devSource: "react-with-addons.js",
-        prodSource: "react-with-addons.min.js",
-    },
-    {
         bowerName: "showdown",
         devSource: "src/showdown.js",
         prodSource: "compressed/showdown.js",
