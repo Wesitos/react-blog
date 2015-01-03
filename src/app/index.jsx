@@ -1,4 +1,6 @@
 'use-strict';
+//React como variable global
+React = require('react');
 Blag = require('../component/Blag.jsx');
 
 var request = new XMLHttpRequest();

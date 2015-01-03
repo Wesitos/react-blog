@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var del = require('del');
 var reactify = require('reactify');
-var source = require('vinyl-source-stream');
+var transform = require('vinyl-transform');
 var fs = require('fs');
 var path = require('path');
 var preen = require('preen');
@@ -13,7 +13,7 @@ var config = { production: false };
 
 // Scripts
 var appDir = "./src/app/";
-var appPaths = fs.readdirSync(appDir);
+var appPath = appDir + "**/*.jsx";
 var appBuildDir = "./build/js/";
 
 var componentDir = "./src/component/"
@@ -75,17 +75,18 @@ gulp.task('vendor', ['preen', 'clean-js'], function(){
 
 gulp.task('browserify', ['clean-js', 'vendor'], function(){
     //Bundle apps
-    appPaths.forEach(function(src){
-        b = browserify();
-        b.transform(reactify);
-        if (config.production) b.transform('uglifyify');
-        b.add("./" + path.join(appDir, src));
-        b.bundle()
-            .pipe(source(src.split(".")[0] + '.js'))
-            .pipe(gulp.dest(appBuildDir))
-            .on('error', gutil.log);
+    var browserified = transform(function(filename){
+        gutil.log('browserify',filename);
+        var b = browserify(filename);
+        //b.transform(reactify);
+
+        return b.bundle();
     });
-    
+    return gulp.src(appPath)
+        .pipe(browserified)
+        .pipe(config.production ? plugins.uglify() : gutil.noop())
+        .pipe(plugins.rename(function(filePath){ filePath.extname = ".js";}))
+        .pipe(gulp.dest(appBuildDir));
 });
 
 gulp.task('css', ['clean-css'], function(){

@@ -14,11 +14,9 @@
     "tests"
   ],
   "dependencies": {
-    "react": "~0.12.2",
     "showdown": "~0.3.1"
   },
   "preen": {
-    "react": ["react-with-addons*"],
     "showdown": ["compressed/*.js",
                  "compressed/extensions/github.js",
                  "src/*.js",
