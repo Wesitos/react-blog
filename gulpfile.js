@@ -8,6 +8,7 @@ var path = require('path');
 var preen = require('preen');
 var plugins = require('gulp-load-plugins')();
 var gutil = require('gulp-util');
+var buildPosts = require("./buildPosts");
 
 var config = { production: false };
 
@@ -42,6 +43,14 @@ var stylesBuildDir = './build/css/';
 var cssPath = stylesDir + '**/*.css';
 var sassPath = stylesDir + '**/*.scss';
 
+// Autores
+var dataPath = './data/';
+var dataBuildDir = './build/data/'
+var authorPath = dataPath + "*/" + 'autor.json';
+
+//Posts
+var postsPath = dataPath + '*/' + 'posts/*.md';
+var postsBuildDir = dataBuildDir;
 
 gulp.task('set-production', function(done){
     config.production = true;
@@ -54,6 +63,14 @@ gulp.task('clean-css', function(done){
 });
 gulp.task('clean-js', function(done){
     del(['build/js'], done);
+})
+
+gulp.task('clean-authors', function(done){
+    del(['build/data/autor'], done);
+})
+
+gulp.task('clean-posts', function(done){
+    del(['build/data/*!.json'], done);
 })
 
 gulp.task('preen', function(done){
@@ -99,15 +116,35 @@ gulp.task('sass', ['clean-css'], function(){
         .pipe(gulp.dest(stylesBuildDir));
 });
 
+gulp.task('author-list', ['clean-authors'], function(){
+    return gulp.src(authorPath)
+        .pipe(plugins.jsoncombine("autores.json", function(data){
+            for(var key in data){
+                gutil.log('author-list: Agregando autor',key);
+                data[path.dirname(key)] = data[key];
+                delete(data[key]);
+            }
+            return new Buffer(JSON.stringify(data));
+        }))
+        .pipe(gulp.dest(dataBuild));
+});
+
+gulp.task('posts', ['clean-posts'], function(done){
+    return gulp.src(postsPath)
+        .pipe(buildPosts());
+        .pipe(plugind.rename(function(filePath){filePath.extname = ".json";}))
+        .pipe(gulp.dest(postsBuildDir))
+});
+
 gulp.task('styles', ['css', 'sass']);
 
 // Produccion
 gulp.task('deploy', ['set-production', 'default']);
 
 // Por defecto, desarrollo
-gulp.task('default', ['vendor', 'browserify', 'styles']);
+gulp.task('default', ['posts', 'author-list', 'vendor', 'browserify', 'styles']);
 
-gulp.task('watch', ['vendor', 'browserify', 'styles'], function(){
+gulp.task('watch', ['default'], function(){
     gulp.watch('src/**/*.jsx', ['browserify']).on('change', function(event){
         gutil.log(event.type, event.path);
     });
