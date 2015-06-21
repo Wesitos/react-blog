@@ -64,9 +64,16 @@ hr {
     cursor: pointer;
 }
 
+pre {
+    padding: 0.5em 0 0.5em 0;
+}
 
+// Highlight Js
+.hljs {
+    background: white;
+}
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
     #blogPostList {
         box-shadow: none;
         width: auto;
@@ -75,7 +82,11 @@ hr {
     }
 }
 
-@media (max-width: 600px){
+
+@media screen and (max-width: 600px){
+    #blogHeader {
+        padding: 10px;
+    }
     p {
         font-size: 18;
         margin: 0 0 0 0;
