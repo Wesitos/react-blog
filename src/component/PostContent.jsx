@@ -37,8 +37,6 @@ var PostContent = React.createClass({
         this.componentDidMount();
     },
     render: function(){
-        var postData = this.props.postData;
-        var postMeta = postData.meta;
         var postText = this.compiledText;
         var resumido = this.state.resumido;
         var acortarTexto = false;
@@ -59,9 +57,7 @@ var PostContent = React.createClass({
             </article>
         );
         var Boton = (
-            <VerMasButton postMeta={postMeta}
-                          onClickCallback={this.verMasCallback}
-                          />
+            <VerMasButton onClickCallback={this.verMasCallback} />
         );
         return(
             <section className="blogPostContent">

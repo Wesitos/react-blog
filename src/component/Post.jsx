@@ -9,12 +9,13 @@ var Post = React.createClass({
         };
     },
     render: function(){
-        var postData = this.props.data;
+        var meta = this.props.meta;
+        var content = this.props.content;
         var resumido = this.props.resumido;
         return (
             <article className="blogPost">
-                <PostHeader postData={postData}/>
-                <PostContent postData={postData} resumido={resumido}/>
+                <PostHeader {...meta}/>
+                <PostContent content={content} resumido={resumido}/>
                 <hr/>
             </article>
         );
