@@ -3,7 +3,7 @@
 var BlogHeader = require('./BlogHeader.jsx');
 var PostList = require('./PostList.jsx');
 
-var Blag = React.createClass({
+var PostPage = React.createClass({
     propTypes:{
         data: React.PropTypes.shape({
             blog: React.PropTypes.shape({
@@ -20,13 +20,13 @@ var Blag = React.createClass({
         })
     },
     render: function(){
-        var data = this.props.data;
+        var data = this.props;
         return(
             <div>
                 <BlogHeader {...data.blog}/>
-                <PostList data={data}/>
+                <Post {...data.post} resumido={false}/>
             </div>
         );
     }
 });
-module.exports = Blag;
+module.exports = PostPage;

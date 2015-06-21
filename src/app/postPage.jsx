@@ -2,7 +2,7 @@
 //React como variable global
 React = require('react');
 
-Blag = require('../component/Index.jsx');
+Blag = require('../component/PostPage.jsx');
 
 blogData = {
     "titulo": "Blag",
@@ -11,12 +11,12 @@ blogData = {
 
 if(typeof module !== 'undefined' && module.exports){
     module.exports = function(postData){
-        return React.renderToString(<Blag posts={postData} blog={blogData}/>);
+        return React.renderToString(<Blag post={postData} blog={blogData}/>);
     };
 }
 else{
     var request = new XMLHttpRequest();
-    request.open('GET', '/json/index.json', true);
+    request.open('GET', '/data.json', true);
     request.onload = function() {
         if (this.status >= 200 && this.status < 400){
             var data = JSON.parse(this.response);
