@@ -1,7 +1,23 @@
 'use-strict';
 var VerMasButton = require("./VerMasButton.jsx");
 
-var MarkdownConverter = new Showdown.converter({extensions: ['github']});
+var marked = require("marked");
+var pygmentize = require('pygmentize-bundled');
+
+marked.setOptions({
+    renderer: new marked.Renderer(),
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: true,
+    smartLists: true,
+    smartypants: false,
+    highlight: function (code, lang, callback) {
+        pigmentize({ lang: lang, format: 'html' }, code, function (err, result) {
+            callback(err, result.toString());
+        });}
+});
 
 var PostContent = React.createClass({
     getDefaultProps: function(){
@@ -22,16 +38,8 @@ var PostContent = React.createClass({
     },
 
     componentWillMount: function(){
-        var postData = this.props.postData;
-        var content = postData.content;
-        this.compiledText = MarkdownConverter.makeHtml(content);
-    },
-    componentDidMount: function(){
-        var post = this.refs.post.getDOMNode();
-        // Seleccionamos los bloques de codigo
-        var listaBloques = post.getElementsByTagName('code');
-        for(var i=0; i< listaBloques.length;i++)
-            hljs.highlightBlock(listaBloques[i]);
+        var content = this.props.content;
+        this.compiledText = marked(content);
     },
     componentDidUpdate: function(){
         this.componentDidMount();
