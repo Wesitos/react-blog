@@ -7,7 +7,7 @@
     "posts": [
         {
             "meta": {
-                "id": 3,
+                "id": "2014-12-08:1",
                 "fecha": "2014-12-8",
                 "titulo": "Titulo Ejemplo",
                 "autor": {
@@ -21,7 +21,7 @@
         },
         {
             "meta": {
-                "id": 2,
+                "id": "2014-12-07:1",
                 "fecha": "2014-12-7",
                 "titulo": "Algo de codigo",
                 "autor": {
@@ -35,7 +35,7 @@
         },
         {
             "meta": {
-                "id": 1,
+                "id": "2014-12-06:1",
                 "fecha": "2014-12-6",
                 "titulo": "Un titulo triste",
                 "autor": {
