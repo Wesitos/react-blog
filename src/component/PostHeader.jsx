@@ -12,7 +12,7 @@ var PostHeader = React.createClass({
         var autor = props.autor;
         var fecha = props.fecha;
         var id = props.id;
-        var postUrl = ["", "posts", autor.nickname, id].join("/");
+        var postUrl = props.url;
         return(
             <header className="blogPostHeader">
                 <a ref="postLink"
