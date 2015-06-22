@@ -4,7 +4,7 @@ var PostDate = require('./PostDate.jsx');
 
 var PostHeader = React.createClass({
     linkOnClickHandler: function(event){
-        event.preventDefault();
+        return;
     },
     render: function(){
         var props = this.props;
