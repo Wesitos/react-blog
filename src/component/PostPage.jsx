@@ -1,7 +1,7 @@
 'use-strict';
 
 var BlogHeader = require('./BlogHeader.jsx');
-var PostList = require('./PostList.jsx');
+var Post = require('./Post.jsx');
 
 var PostPage = React.createClass({
     propTypes:{
