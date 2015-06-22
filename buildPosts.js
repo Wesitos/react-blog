@@ -2,55 +2,47 @@ var through = require('through2');
 var  gutil = require('gulp-util');
 var Path = require('path');
 
-const PLUGIN_NAME = "build-posts";
-
-function makeJson(filetext, filename, path) {
-    var nameParams = filename.split(":"); // [date, [id,] title]
+// relative path and base path
+function makeJson(filetext, relative) {
+    var nameParams = relative.split(Path.sep).pop().split(":"); // [date, [id,] title]
+    var fecha = nameParams[0];
     var postId = [nameParams[0],(nameParams.length<3)?1:nameParams[1]].join(":");
+    var autor = relative.split(Path.sep)[0];
+    var titulo = nameParams[nameParams.length-1].replace(".md", "").replace(/-/g, " ");
+    var path = [autor, fecha.replace(/-/g,"/"), titulo.replace(/ /g,"-").replace(/$/, ".json")].join("/");
     var obj = {
         meta: {
-            id: postId,
-            fecha: nameParams[0],
-            autor: Path.dirname(path).split(Path.sep).slice(-2)[0],
-            titulo: (nameParans.length<3)?nameParams[2]:nameParams[3]
+            id: [autor,postId].join(":"),
+            fecha: fecha,
+            autor: autor,
+            titulo: titulo,
+            url: ["", path.replace(/\.json$/, ".html")].join("/")
         },
         content: filetext
     };
-    return JSON.stringify(obj);
+    return {content:JSON.stringify(obj), path: path};
 };
 
 function buildPosts(){
-    var stream = through.obj(function(file, enc, cb) {
-        var text = makeJson(file.contents, file.relative, file.base);
-        var textBuffer = new Buffer(text); // allocate ahead of time
-
-        // Creating a stream through which each file will pass
-        return through.obj(function(file, enc, cb) {
-            if (file.isNull()) {
-                // return empty file
-                return cb(null, file);
-            }
-            if (file.isBuffer()) {
-                file.contents = Buffer.concat([textBuffer, file.contents]);
-            }
-            if (file.isStream()) {
-                var stream = through();
-                stream.write(text);
-                file.contents = file.contents.pipe(stream);
-            }
-            cb(null, file);
-        });
+    // Creating a stream through which each file will pass
+    return through.obj(function(file, enc, cb) {
+        var data = makeJson(file.contents.toString(), file.relative);
+        gutil.log("buildPosts", file.relative);
+        if (file.isNull()) {
+            // return empty file
+            return cb(null, file);
+        }
+        if (file.isBuffer()) {
+            file.contents = new Buffer(data.content);
+        }
+        if (file.isStream()) {
+            var stream = through();
+            stream.write(text);
+            file.contents = file.contents.pipe(stream);
+        }
+        file.path = Path.join(file.base, data.path);
+        return cb(null, file);
     });
 };
-
-
-// var buildPosts = function(postsPath, buildPath, cb){
-//     glob(postsPath, function (err, files){
-//         var bufferList = files.map(function getFiles(fileName){
-//             fs.readFile(fileName, function(err,data){
-//                 if(data) makePost(data, filename, buildPath);});
-//         });
-//     });
-// };
 
 module.exports = buildPosts;
