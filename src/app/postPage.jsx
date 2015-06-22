@@ -11,17 +11,19 @@ blogData = {
 
 if(typeof window !== 'undefined' && window.document){
     var request = new XMLHttpRequest();
-    request.open('GET', ["/json", window.location.pathname.replace(".html",".json")].join(""), true);
+    var path = window.location.pathname;
+    var dataPath = ["/json",path.endsWith(".html")?path.replace(/\.html$/,".json"):path.replace(/$/, "index.json")].join("") ;
+    request.open('GET', dataPath, true);
     request.onload = function() {
-        if (this.status >= 200 && this.status < 400){console.log("Data loaded!");
-            var data = JSON.parse(this.response);
-            React.render(<App post={data} blog={blogData}/>, document.getElementById("app-container"));
+        if (this.status >= 200 && this.status < 400){
+            var pageData = JSON.parse(this.response);
+            React.render(<App {...pageData} blog={blogData}/>, document.getElementById("app-container"));
         };
     };
     request.send();
 }
 else if(typeof module !== 'undefined' &&  module.exports){
-    module.exports = function(postData){
-        return React.renderToString(<App post={postData} blog={blogData}/>);
+    module.exports = function(pageData){
+        return React.renderToString(<App {...pageData} blog={blogData}/>);
     };
 }

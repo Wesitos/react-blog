@@ -11,15 +11,16 @@ function makeJson(filetext, relative) {
     var titulo = nameParams[nameParams.length-1].replace(".md", "").replace(/-/g, " ");
     var path = [autor, fecha.replace(/-/g,"/"), titulo.replace(/ /g,"-").replace(/$/, ".json")].join("/");
     var obj = {
-        meta: {
-            id: [autor,postId].join(":"),
-            fecha: fecha,
-            autor: autor,
-            titulo: titulo,
-            url: ["", path.replace(/\.json$/, ".html")].join("/")
-        },
-        content: filetext
-    };
+        post: {
+            meta: {
+                id: [autor,postId].join(":"),
+                fecha: fecha,
+                autor: autor,
+                titulo: titulo,
+                url: ["", path.replace(/\.json$/, ".html")].join("/")
+            },
+            content: filetext
+        }};
     return {content:JSON.stringify(obj), path: path};
 };
 

@@ -16,8 +16,8 @@ if(typeof window !== 'undefined' && window.document){
     request.open('GET', dataPath, true);
     request.onload = function() {
         if (this.status >= 200 && this.status < 400){
-            var data = JSON.parse(this.response);
-            React.render(<App {...data} blog={blogData}/>, document.getElementById("app-container"));
+            var pageData = JSON.parse(this.response);
+            React.render(<App {...pageData} blog={blogData}/>, document.getElementById("app-container"));
         };
     };
     request.send();

@@ -142,7 +142,7 @@ gulp.task('postList', ['posts'], function(done){
     .pipe(plugins.jsoncombine("index.json", function(data){
         var postList = [];
         for(var key in data){
-            postList.push(data[key]);
+            postList.push(data[key].post);
         };
         var outData = {posts: postList}
         return new Buffer(JSON.stringify(outData));
