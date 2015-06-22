@@ -2,7 +2,7 @@
 var VerMasButton = require("./VerMasButton.jsx");
 
 var marked = require("marked");
-var pygmentize = require('pygmentize-bundled');
+var hljs = require("highlight.js");
 
 marked.setOptions({
     renderer: new marked.Renderer(),
@@ -13,10 +13,10 @@ marked.setOptions({
     sanitize: true,
     smartLists: true,
     smartypants: false,
-    highlight: function (code, lang, callback) {
-        pigmentize({ lang: lang, format: 'html' }, code, function (err, result) {
-            callback(err, result.toString());
-        });}
+    highlight: function (code, lang) {
+        var out = hljs.highlight(lang, code);
+        return out.value;
+    }
 });
 
 var PostContent = React.createClass({
