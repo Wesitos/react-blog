@@ -1,13 +1,12 @@
 react-blog
 ============
-Blog con frontend con react y nodejs como backend.
+Blog estatico construido con react.
 ### Estructura de carpetas
-    training
-    ├── build : CSS y Javascript compilados para navegador (creado al construir)
-    │   ├── css
-    │   └── js : Scripts de /src/app/ compilados
-    │       └── vendor : Librerias externas
-    ├── media
+    Blag
+    ├── build : Raiz de los archivos servidos
+    ├── static
+    │   │   ├── css
+    │   │   └── js
     └── src
         ├── app : Scripts principales de cada pagina (jsx)
         ├── component : Componentes de react (jsx)
@@ -30,6 +29,10 @@ Un componente de react por archivo en `src/component`. Los componentes se refere
        para que pueda ser utilizado */
     module.exports = Foo;
 ```
+Los scripts en App deben encargarse del renderizado de la pagina cuando se ejecuten en el cliente.
+Esto incluye descargar la data necesaria para el renderizado.
+Al ejecutarse en el servidor, deben exportar una funcion que reciba las propiedades del componente
+y devuelva el componente renderizado en una cadena.
 ``` js
     /* Archivo: src/app/index.jsx */
     
@@ -37,16 +40,38 @@ Un componente de react por archivo en `src/component`. Los componentes se refere
     var Foo = require("../component/Foo.jsx");
     
     React.render(<Foo/>, document.body);
+    
+    if(typeof window !== 'undefined' && window.document){
+        var path = window.location.pathname;
+        var dataPath = ["/json",path.endsWith(".html")?path.replace(/\.html$/,".json"):path.replace(/$/, "index.json")].join("") ;
+        request.open('GET', dataPath, true);
+        request.onload = function() {
+            if (this.status >= 200 && this.status < 400){
+                var appData = JSON.parse(this.response);
+                React.render(<Foo {...appData}/>, document.getElementById("app-container"));
+            };
+        };
+        request.send();
+    }
+    else if(typeof module !== 'undefined' &&  module.exports){
+        module.exports = function(appData){
+            return React.renderToString(<Foo {...appData}/>);
+        };
+    }
 ```
+Utilizamos Plates.js para inyectar el componente renderizado en el documento html ademas
+de incluir
 ``` html
 <!-- Archivo: src/html/index.html -->
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="static/js/vendor/vendor.js" />
-        <script src="/static/js/index.js" />
+        <script src="static/js/vendor/vendor.js"></script>
     </head>
-    <body></body>
+    <body>
+        <div id="app-container"></div>
+        <script src=""></script> <!-- <script src="/static/js/index.js"></script> -->
+    </body>
 </html
 ```
 ### Como utilizar
@@ -57,6 +82,10 @@ $ npm install
 Para construir.
 ``` bash
 $ npm run build
+```
+Para construir continuamente
+``` bash
+$ npm run dev
 ```
 Para ejecutar
 ``` bash
