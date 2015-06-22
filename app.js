@@ -6,12 +6,8 @@ var port = process.env.PORT || 8080;
 //Gzip
 app.use(compress());
 
-//Serve Static Files
-app.use('/static', express.static(__dirname + '/build'));
-
-//Serve html
-app.use('/', express.static(__dirname + '/src/html'));
-
+//Serve
+app.use('/*', express.static(__dirname + '/build'));
 
 //Run server
 app.listen(port);
