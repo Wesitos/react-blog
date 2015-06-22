@@ -2,26 +2,28 @@
 //React como variable global
 React = require('react');
 
-Blag = require('../component/Index.jsx');
+App = require('../component/Index.jsx');
 
 blogData = {
     "titulo": "Blag",
     "subtitulo": "Something, something, something complete"
 };
 
-if(typeof module !== 'undefined' && module.exports){
-    module.exports = function(postData){
-        return React.renderToString(<Blag posts={postData} blog={blogData}/>);
-    };
-}
-else{
+if(typeof window !== 'undefined' && window.document){
     var request = new XMLHttpRequest();
-    request.open('GET', '/json/index.json', true);
+    var path = window.location.pathname;
+    var dataPath = ["/json",path.endsWith(".html")?path.replace(/\.html$/,".json"):path.replace(/$/, "index.json")].join("") ;
+    request.open('GET', dataPath, true);
     request.onload = function() {
         if (this.status >= 200 && this.status < 400){
             var data = JSON.parse(this.response);
-            React.render(<Blag {...data} blog={blogData}/>, document.body);
+            React.render(<App {...data} blog={blogData}/>, document.getElementById("app-container"));
         };
     };
-request.send();
+    request.send();
+}
+else{
+    module.exports = function(pageData){
+        return React.renderToString(<App {...pageData} blog={blogData}/>);
+    };
 }
