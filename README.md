@@ -60,7 +60,7 @@ y devuelva el componente renderizado en una cadena.
     }
 ```
 Utilizamos Plates.js para inyectar el componente renderizado en el documento html ademas
-de incluir
+de incluir el script que manejara las actualizaciones en el cliente.
 ``` html
 <!-- Archivo: src/html/index.html -->
 <!DOCTYPE html>
