@@ -9,48 +9,50 @@ var preen = require('preen');
 var plugins = require('gulp-load-plugins')();
 var gutil = require('gulp-util');
 var buildPosts = require("./buildPosts");
+var renderPages = require("./render");
 
 var config = { production: false };
 
 // Scripts
 var appDir = "./src/app/";
 var appPath = appDir + "**/*.jsx";
-var appBuildDir = "./build/js/";
+var appBuildDir = "./build/static/js/";
 
 var componentDir = "./src/component/"
 var componentPaths = fs.readdirSync(componentDir);
-var componentBuildDir = "./build/js/";
+var componentBuildDir = "./build/static/js/";
 
-var vendorDir = "./build/js/";
+var vendorDir = "./build/static/js/";
 var vendorFileName = "vendor.js";
 var vendorModules = [
-    {
-        bowerName: "showdown",
-        devSource: "src/showdown.js",
-        prodSource: "compressed/showdown.js",
-    },
-    {
-        bowerName: "showdown",
-        devSource: "src/extensions/github.js",
-        prodSource: "compressed/extensions/github.js",
-    },
+    // {
+    //     bowerName: "showdown",
+    //     devSource: "src/showdown.js",
+    //     prodSource: "compressed/showdown.js",
+    // },
+    // {
+    //     bowerName: "showdown",
+    //     devSource: "src/extensions/github.js",
+    //     prodSource: "compressed/extensions/github.js",
+    // },
 ];
 
 // Styles
 var stylesDir ='./src/styles/';
-var stylesBuildDir = './build/css/';
+var stylesBuildDir = './build/static/css/';
 
 var cssPath = stylesDir + '**/*.css';
 var sassPath = stylesDir + '**/*.scss';
 
 // Autores
 var dataPath = './data/';
-var dataBuildDir = './build/data/'
-var authorPath = dataPath + "*/" + 'autor.json';
+var dataBuildDir = './build/json/';
+var authorPath = dataPath + "*/autor.json";
 
 //Posts
-var postsPath = dataPath + '*/' + 'posts/*.md';
+var postsPath = dataPath + '*/posts/**/*.md';
 var postsBuildDir = dataBuildDir;
+var postsBuildPath = dataBuildDir + '*/**/*.json';
 
 gulp.task('set-production', function(done){
     config.production = true;
@@ -66,11 +68,11 @@ gulp.task('clean-js', function(done){
 })
 
 gulp.task('clean-authors', function(done){
-    del(['build/data/autor'], done);
+    del([dataBuildDir + '/autores.json'], done);
 })
 
 gulp.task('clean-posts', function(done){
-    del(['build/data/*!.json'], done);
+    del([postsBuildDir + '/json/posts'], done);
 })
 
 gulp.task('preen', function(done){
@@ -120,20 +122,38 @@ gulp.task('author-list', ['clean-authors'], function(){
     return gulp.src(authorPath)
         .pipe(plugins.jsoncombine("autores.json", function(data){
             for(var key in data){
-                gutil.log('author-list: Agregando autor',key);
+                gutil.log('author-list','Agregando autor',key.split(path.sep)[0]);
                 data[path.dirname(key)] = data[key];
                 delete(data[key]);
             }
             return new Buffer(JSON.stringify(data));
         }))
-        .pipe(gulp.dest(dataBuild));
+        .pipe(gulp.dest(dataBuildDir));
 });
 
 gulp.task('posts', ['clean-posts'], function(done){
     return gulp.src(postsPath)
-        .pipe(buildPosts());
-        .pipe(plugind.rename(function(filePath){filePath.extname = ".json";}))
+        .pipe(buildPosts())
         .pipe(gulp.dest(postsBuildDir))
+});
+
+gulp.task('postList', ['posts'], function(done){
+    return gulp.src(postsBuildPath)
+    .pipe(plugins.jsoncombine("index.json", function(data){
+        var postList = [];
+        for(var key in data){
+            postList.push(data[key]);
+        };
+        var outData = {posts: postList}
+        return new Buffer(JSON.stringify(outData));
+    }))
+    .pipe(gulp.dest(dataBuildDir));
+});
+
+gulp.task('render', ['postList', 'author-list'], function(done){
+    renderPages(function(origin, dest){
+        gutil.log("Render", origin, ">>", dest);
+    }, done);
 });
 
 gulp.task('styles', ['css', 'sass']);
@@ -142,7 +162,7 @@ gulp.task('styles', ['css', 'sass']);
 gulp.task('deploy', ['set-production', 'default']);
 
 // Por defecto, desarrollo
-gulp.task('default', ['posts', 'author-list', 'vendor', 'browserify', 'styles']);
+gulp.task('default', ['render', 'vendor', 'browserify', 'styles']);
 
 gulp.task('watch', ['default'], function(){
     gulp.watch('src/**/*.jsx', ['browserify']).on('change', function(event){
