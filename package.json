@@ -38,8 +38,7 @@
   },
   "scripts": {
     "build": "gulp",
-    "dev": "gulp watch",
-    "deploy": "gulp deploy"
+    "dev": "gulp watch"
   },
   "devDependencies": {
     "gulp-load-plugins": "^0.8.0",
