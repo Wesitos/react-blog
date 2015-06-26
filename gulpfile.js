@@ -1,13 +1,4 @@
 'use strict';
-var gulp = require('gulp');
-var del = require('del');
-var fs = require('fs');
-var path = require('path');
-var plugins = require('gulp-load-plugins')();
-var gutil = require('gulp-util');
-var buildPosts = require("./buildPosts");
-var renderPages = require("./render");
-
 var gulp = require('gulp-task-master')({
   dirname: 'tasks',   // The directory that tasks are located in
   pattern: '**/*.js',    // Pattern to use when looking for task files
