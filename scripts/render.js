@@ -9,13 +9,13 @@ var Path = require('path');
 var Plates = require('plates');
 
 // Archivo de rutas
-var routes = require("./routes");
+var routes = require("../routes");
 
 // Transparently support JSX
 require('node-jsx').install({extension: '.jsx'});
 
 var renderPage = function(data, html, appName){
-    var renderedComponent = require(["./src/app",appName+".jsx"].join(Path.sep))(data);
+    var renderedComponent = require(["../src/app",appName+".jsx"].join(Path.sep))(data);
     var platesData = {
         script: ["/static/js/",appName,"-min.js"].join("")
     };
@@ -30,7 +30,7 @@ var renderAll = function(progress, cb){
     routes.routes.forEach(function (route){
         var filenames = glob.sync(Path.join("./build/json", route.data));
         filenames.forEach(function(filename){
-            var data = require([".",filename].join("/"));
+            var data = require(["..",filename].join("/"));
             var html = fs.readFileSync(Path.join('./src/html', route.html),'utf-8');
             var output = renderPage(data, html, route.app);
             // Cambiamos la extension del nombre

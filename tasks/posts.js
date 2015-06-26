@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var buildPosts = require('../buildPosts.js');
+var buildPosts = require('../scripts/buildPosts.js');
 var plugins = require('gulp-load-plugins')();
 var postConfig = require('../config.json').blog.post;
 var dataConfig = require('../config.json').path.data;

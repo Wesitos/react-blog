@@ -1,6 +1,6 @@
 'use strict';
 
-var renderPages = require('../render.js');
+var renderPages = require('../scripts/render.js');
 var gutil = require('gulp-util');
 var dataConfig = require('../config.json').path.data;
 var Path = require('path');
