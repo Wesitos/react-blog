@@ -41,9 +41,6 @@ var PostContent = React.createClass({
         var content = this.props.content;
         this.compiledText = marked(content);
     },
-    componentDidUpdate: function(){
-        this.componentDidMount();
-    },
     render: function(){
         var postText = this.compiledText;
         var resumido = this.state.resumido;

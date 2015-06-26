@@ -9,6 +9,7 @@ var PostHeader = React.createClass({
     render: function(){
         var props = this.props;
         var titulo = props.titulo;
+        titulo = titulo.charAt(0).toUpperCase() + titulo.slice(1).toLowerCase();
         var autor = props.autor;
         var fecha = props.fecha;
         var id = props.id;
