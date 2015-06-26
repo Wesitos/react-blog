@@ -34,15 +34,13 @@
     "react": "^0.13.3",
     "reactify": "^1.1.1",
     "through2": "^2.0.0",
-    "yaml-front-matter": "^3.2.3"
+    "yaml-front-matter": "^3.2.3",
+    "gulp-load-plugins": "^0.8.0",
+    "gulp-task-master": "^1.0.0"
   },
   "scripts": {
     "build": "gulp",
     "dev": "gulp watch"
-  },
-  "devDependencies": {
-    "gulp-load-plugins": "^0.8.0",
-    "gulp-task-master": "^1.0.0"
   },
   "browserify": {
     "transform": [
