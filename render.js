@@ -12,12 +12,12 @@ var Plates = require('plates');
 var routes = require("./routes");
 
 // Transparently support JSX
-require('node-jsx').install();
+require('node-jsx').install({extension: '.jsx'});
 
 var renderPage = function(data, html, appName){
     var renderedComponent = require(["./src/app",appName+".jsx"].join(Path.sep))(data);
     var platesData = {
-        script: ["/static/js/",appName,".js"].join("")
+        script: ["/static/js/",appName,"-min.js"].join("")
     };
     var map = Plates.Map();
     map.where('id').is("app-container").append(renderedComponent);
@@ -46,5 +46,4 @@ var renderAll = function(progress, cb){
     })
     cb();
 }
-
 module.exports = renderAll;
