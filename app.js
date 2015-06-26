@@ -7,7 +7,7 @@ var port = process.env.PORT || 8080;
 app.use(compress());
 
 //Serve
-app.use('/*', express.static(__dirname + '/build'));
+app.use('/', express.static(__dirname + '/build'));
 
 //Run server
 app.listen(port);
