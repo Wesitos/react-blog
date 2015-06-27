@@ -1,19 +1,16 @@
 {
-    "jsonDir": "build/json",
-    "htmlDir": "src/html",
-    "appDir": "src/app",
     "routes":[
         {
             "data": "index.json",
             "route": "/",
-            "html": "index.html",
+            "html": "common.html",
             "app": "index"
         },
         {
             "data": "*/**/*.json",
             "route": "/",
-            "html": "post.html",
-            "app": "postPage"
+            "html": "common.html",
+            "app": "index"
         }
     ]
 }

@@ -24,7 +24,7 @@ var renderPage = function(data, html, appName){
     map.where('id').is("app-script").use("script").as('src');
     var output =  Plates.bind(html,platesData,map)
     return output
-}
+};
 
 var renderAll = function(progress, cb){
     routes.routes.forEach(function (route){

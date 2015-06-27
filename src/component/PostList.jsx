@@ -3,7 +3,7 @@ var Post = require('./Post.jsx');
 
 var PostList = React.createClass({
     render: function(){
-        var listaPosts = this.props.posts;
+        var listaPosts = [].concat(this.props.post);
         var postDescriptors = listaPosts.map(function(postData){
             return <Post {...postData} resumido={true} key={"post-" + postData.meta.id}/>;
         });

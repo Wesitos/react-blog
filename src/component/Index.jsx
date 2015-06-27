@@ -22,7 +22,7 @@ var Index = React.createClass({
         return(
             <div>
                 <BlogHeader {...data.blog}/>
-                <PostList posts={data.posts}/>
+                <PostList post={data.post}/>
             </div>
         );
     }

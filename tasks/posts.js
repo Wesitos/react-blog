@@ -12,7 +12,13 @@ module.exports = function(){
         for(var key in data){
             postList.push(data[key].post);
         };
-        var outData = {posts: postList}
+        postList.sort(function(x,y){
+            var fechaX = new Date(x.fecha.split('-'));
+            var fechaY = new Date(y.fecha.split('-'));
+
+            return (fechaY - fechaX) || x.autor.localeCompare(y.autor);
+        });
+        var outData = {post: postList}
         return new Buffer(JSON.stringify(outData));
     })
 
