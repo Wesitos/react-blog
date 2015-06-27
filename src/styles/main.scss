@@ -1,19 +1,10 @@
+@import 'post';
+
 body {
+    font-size: 18px;
     font-weight: 200;
     line-height: 1.46em;
-    font-family: "Proxima Nova Regular","Segoe UI",Roboto,
-    "Droid Sans","Helvetica Neue",Arial,sans-serif;
     color: #333;
-}
-
-h1, h2, h3 {
-    font-family: "Skolar Bold","Segoe UI Bold","Roboto Slab",
-    "Droid Serif",AvenirNext-Bold,"Avenir Bold",Georgia,
-    "Times New Roman",Times,serif;
-}
-
-p {
-    font-size: 16;
 }
 
 .box {
@@ -43,8 +34,9 @@ hr {
 #blogPostList {
     @extend .box;
     padding: 30px 0px 50px 0px;
-    width: 90%;
+    width: auto;
     margin: 10 auto 20 auto;
+    max-width: 700px;
 }
 
 .blogPost {
@@ -54,6 +46,7 @@ hr {
 
 .blogPostHeader {
     margin-bottom: 20px;
+    font-size:25px;
 }
 
 .blogPostcontent {
@@ -62,15 +55,6 @@ hr {
 .blogVerMasButton {
     color: blue;
     cursor: pointer;
-}
-
-pre {
-    padding: 0.5em 0 0.5em 0;
-}
-
-// Highlight Js
-.hljs {
-    background: white;
 }
 
 @media screen and (max-width: 800px) {
@@ -82,13 +66,12 @@ pre {
     }
 }
 
-
 @media screen and (max-width: 600px){
     #blogHeader {
         padding: 10px;
     }
-    p {
-        font-size: 18;
+    body {
+        font-size: 16px;
         margin: 0 0 0 0;
         line-height: 1.4em;
     }

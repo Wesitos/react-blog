@@ -1,0 +1,44 @@
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Droid Serif', serif;
+    font-weight: 400;
+}
+h1{
+    font-size: 2em;
+}
+
+h2{
+    font-size: 1.5em;
+}
+h3,h4,h5,h6{
+    font-size: 1.20em;
+}
+
+p {
+    font-family: 'Roboto', sans;
+    font-size: 1em;
+}
+
+td{
+    padding: 5px 10px 5px 10px;
+}
+
+table, th,td{
+    border: 1px solid black;
+}
+
+table {
+    text-align: center;
+    margin: auto;
+    border-collapse: collapse;
+}
+pre {
+    padding: 0.5em 1em 0.5em 1em;
+}
+code{
+    font-size: 0.8em;
+}
+
+// Highlight Js
+.hljs {
+    background: white;
+}
