@@ -1,6 +1,7 @@
-h1,h2,h3,h4,h5,h6{
+h1,h2,h3,h4,h5,h6,th{
     font-family: 'Droid Serif', serif;
     font-weight: 400;
+    margin: 0  0 0.67em 0;
 }
 h1{
     font-size: 2em;
@@ -16,10 +17,11 @@ h3,h4,h5,h6{
 p {
     font-family: 'Roboto', sans;
     font-size: 1em;
+    margin: 0 0 1em 0;
 }
 
 td{
-    padding: 5px 10px 5px 10px;
+    padding: 0px 2px 0px 2px;
 }
 
 table, th,td{
