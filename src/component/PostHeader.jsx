@@ -18,11 +18,11 @@ var PostHeader = React.createClass({
             <header className="blogPostHeader">
                 <a ref="postLink"
                    href={postUrl} onClick={this.linkOnClickHandler}><h2>{titulo}</h2></a>
-                <p> {"por "}
+                <span> {"por "}
                     <AutorLabel autor={autor}/>
                     {" el "}
                     <PostDate fecha={fecha}/>
-                </p>
+                </span>
             </header>
         );
     }

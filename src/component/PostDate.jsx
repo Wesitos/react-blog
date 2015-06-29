@@ -10,10 +10,9 @@ var PostDate = React.createClass({
             return x + "/" + y;
         });
         return(
-            <span className="postDate">{strFecha}</span>
+            <time className="postDate" dateTime={this.props.fecha}>{strFecha}</time>
         );
     }
 });
-
 
 module.exports = PostDate;
