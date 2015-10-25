@@ -11,6 +11,7 @@ gulp.task('styles', ['css', 'sass']);
 gulp.task('default', ['render', 'vendor', 'browserify', 'minify-css']);
 
 gulp.task('watch', [
+    'default',
     'css.watch',
     'sass.watch',
     'minify-css.watch',
