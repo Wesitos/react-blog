@@ -1,4 +1,5 @@
 'use-strict';
+import React from "react";
 
 var BlogHeader = React.createClass({
     render: function(){

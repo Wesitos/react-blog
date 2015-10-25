@@ -23,7 +23,8 @@
     "marked": "^0.3.3",
     "mkdirp": "^0.5.1",
     "plates": "^0.4.11",
-    "react": "^0.13.3",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
     "yaml-front-matter": "^3.2.3"
   },
   "devDependencies": {
@@ -57,10 +58,6 @@
     ]
   },
   "aliasify": {
-    "aliases": {
-      "react": "react/addons",
-      "react/addons": "react/addons"
-    },
     "keywords": [
       "react"
     ],

@@ -1,5 +1,7 @@
 'use-strict';
 
+import React from "react";
+
 var PostDate = React.createClass({
     render: function(){
         var date = new Date(this.props.fecha.split('-'));

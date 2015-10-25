@@ -1,7 +1,9 @@
 'use-strict';
 
-var BlogHeader = require('./BlogHeader.jsx');
-var Post = require('./Post.jsx');
+import React from "react";
+
+import BlogHeader from './BlogHeader.jsx';
+import Post from './Post.jsx';
 
 var PostPage = React.createClass({
     propTypes:{

@@ -4,7 +4,8 @@ var fs = require("fs");
 var mkdirp = require("mkdirp");
 var gutil = require("gulp-util");
 
-var React = require('react');
+var cloneElement = require('react').cloneElement;
+var ReactDOMServer = require('react-dom/server');
 var Path = require('path');
 var Plates = require('plates');
 
@@ -15,15 +16,16 @@ var routes = require("../routes");
 require("babel/register");
 
 var renderPage = function(data, html, appName){
-    var renderedComponent = require(["../src/app",appName+".jsx"].join(Path.sep))(data);
+    var Component = require(["../src/app",appName+".jsx"].join(Path.sep));
+    var renderedComponent = ReactDOMServer.renderToString(cloneElement(Component, data));
     var platesData = {
         script: ["/static/js/",appName,"-min.js"].join("")
     };
     var map = Plates.Map();
     map.where('id').is("app-container").append(renderedComponent);
     map.where('id').is("app-script").use("script").as('src');
-    var output =  Plates.bind(html,platesData,map)
-    return output
+    var output =  Plates.bind(html,platesData,map);
+    return output;
 };
 
 var renderAll = function(progress, cb){
@@ -42,8 +44,8 @@ var renderAll = function(progress, cb){
             mkdirp.sync(Path.dirname(path));
             fs.writeFileSync(path, output);
             progress(filename, path);
-        })
-    })
-    cb();
-}
+        });
+    });
+        cb();
+};
 module.exports = renderAll;

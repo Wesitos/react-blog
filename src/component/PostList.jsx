@@ -1,5 +1,7 @@
 'use-strict';
-var Post = require('./Post.jsx');
+import React from "react";
+
+import Post from './Post.jsx';
 
 var PostList = React.createClass({
     render: function(){

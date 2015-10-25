@@ -1,8 +1,10 @@
 'use-strict';
-var VerMasButton = require("./VerMasButton.jsx");
+import React from "react";
 
-var marked = require("marked");
-var hljs = require("highlight.js");
+import VerMasButton from "./VerMasButton.jsx";
+
+import marked from"marked";
+import hljs from "highlight.js";
 
 marked.setOptions({
     renderer: new marked.Renderer(),

@@ -1,4 +1,5 @@
 'use-strict';
+import React from "react";
 
 var AutorLabel = React.createClass({
     render: function(){

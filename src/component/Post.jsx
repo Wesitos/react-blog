@@ -1,6 +1,8 @@
 'use-strict';
-var PostHeader = require('./PostHeader.jsx');
-var PostContent = require('./PostContent.jsx');
+import React from "react";
+
+import PostHeader from './PostHeader.jsx';
+import PostContent from './PostContent.jsx';
 
 var Post = React.createClass({
     getDefaultProps: function(){

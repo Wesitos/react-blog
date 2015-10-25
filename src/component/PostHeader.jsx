@@ -1,6 +1,8 @@
 'use-strict';
-var AutorLabel  = require('./AutorLabel.jsx');
-var PostDate = require('./PostDate.jsx');
+import React from "react";
+
+import AutorLabel  from './AutorLabel.jsx';
+import PostDate from './PostDate.jsx';
 
 var PostHeader = React.createClass({
     linkOnClickHandler: function(event){

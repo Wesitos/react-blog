@@ -1,7 +1,9 @@
 'use-strict';
 
-var BlogHeader = require('./BlogHeader.jsx');
-var PostList = require('./PostList.jsx');
+import React from "react";
+
+import BlogHeader from './BlogHeader.jsx';
+import PostList from './PostList.jsx';
 
 var Index = React.createClass({
     propTypes:{
