@@ -1,6 +1,6 @@
 'use strict';
-var glob = require("glob")
-var fs = require("fs")
+var glob = require("glob");
+var fs = require("fs");
 var mkdirp = require("mkdirp");
 var gutil = require("gulp-util");
 
@@ -12,7 +12,7 @@ var Plates = require('plates');
 var routes = require("../routes");
 
 // Transparently support JSX
-require('node-jsx').install({extension: '.jsx'});
+require("babel/register");
 
 var renderPage = function(data, html, appName){
     var renderedComponent = require(["../src/app",appName+".jsx"].join(Path.sep))(data);
