@@ -11,12 +11,16 @@ var Index = React.createClass({
             titulo: React.PropTypes.string,
             subtitulo: React.PropTypes.string
         }),
-        page: React.PropTypes.oneOf(['main', 'post']),
-        posts: React.PropTypes.arrayOf(
+        post: React.PropTypes.arrayOf(
             React.PropTypes.shape({
-                // La forma de meta aun no esta bien definida
-                meta: React.PropTypes.object,
-                content: React.PropTypes.string
+                meta: React.PropTypes.shape({
+                    id: React.PropTypes.string.isRequired,
+                    fecha: React.PropTypes.string.isRequired,
+                    autor: React.PropTypes.string.isRequired,
+                    titulo: React.PropTypes.string.isRequired,
+                    url: React.PropTypes.string.isRequired,
+                }),
+                content: React.PropTypes.string.isRequired
             }))
     },
     render: function(){

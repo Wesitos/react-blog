@@ -4,7 +4,9 @@ import {cloneElement} from "react";
 module.exports = function(Component){
     var request = new XMLHttpRequest();
     var path = window.location.pathname;
-    var dataPath = ["/json",path.endsWith(".html")?path.replace(/\.html$/,".json"):path.replace(/$/, "index.json")].join("") ;
+    var dataPath = path.replace(/^/, "/json") //Carpeta json
+                       .replace(/\.html$/, ".json") //Cambia html por json
+                       .replace(/\/$/, "/index.json"); // Para los index
     request.open('GET', dataPath, true);
     
     request.onload = function() {

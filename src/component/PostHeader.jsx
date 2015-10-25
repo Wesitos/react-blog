@@ -1,7 +1,7 @@
 'use-strict';
 import React from "react";
 
-import AutorLabel  from './AutorLabel.jsx';
+import AuthorLabel  from './AuthorLabel.jsx';
 import PostDate from './PostDate.jsx';
 
 var PostHeader = React.createClass({
@@ -23,7 +23,7 @@ var PostHeader = React.createClass({
                    href={postUrl} onClick={this.linkOnClickHandler}><h3>{titulo}</h3></a>
                 <p className="postSubHeader">
                     <span>{"por "}</span>
-                    <AutorLabel autor={autor}/>
+                    <AuthorLabel autor={autor}/>
                     <span>{" el "}</span>
                     <PostDate fecha={fecha}/>
                 </p>

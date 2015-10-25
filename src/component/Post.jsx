@@ -7,7 +7,7 @@ import PostContent from './PostContent.jsx';
 var Post = React.createClass({
     getDefaultProps: function(){
         return{
-            resumido: false
+            resumido: true
         };
     },
     render: function(){
