@@ -10,11 +10,13 @@ gulp.task('styles', ['css', 'sass']);
 
 gulp.task('default', ['render', 'vendor', 'browserify', 'styles']);
 
+gulp.task('deploy', ['default', 'minify-css']);
+
 gulp.task('watch', [
     'default',
     'css.watch',
     'sass.watch',
-    'minify-css.watch',
     'vendor.watch',
     'browserify.watch'
 ]);
+
