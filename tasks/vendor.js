@@ -19,9 +19,6 @@ module.exports =  function(){
         .pipe(source(vendorConfig.build.name))
         .pipe(buffer())
         .pipe(gulp.dest(vendorConfig.build.dirname))
-        .pipe(plugins.uglify())
-        .pipe(plugins.rename({suffix:"-min"}))
-        .pipe(gulp.dest(vendorConfig.build.dirname))
         .on('error', gutil.log);
 };
 module.exports.watch = ["package.json", "config.json"];

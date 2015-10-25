@@ -13,20 +13,20 @@ module.exports = function(){
             postList.push(data[key].post);
         };
         postList.sort(function(x,y){
-            var fechaX = new Date(x.fecha.split('-'));
-            var fechaY = new Date(y.fecha.split('-'));
+            var fechaX = new Date(x.meta.fecha.split('-'));
+            var fechaY = new Date(y.meta.fecha.split('-'));
 
             return (fechaY - fechaX) || x.autor.localeCompare(y.autor);
         });
-        var outData = {post: postList}
+        var outData = {post: postList};
         return new Buffer(JSON.stringify(outData));
-    })
+    });
 
     return gulp.src(postConfig.src)
         .pipe(buildPosts())
         .pipe(gulp.dest(dataConfig.build))
         .pipe(makePostList)
-        .pipe(gulp.dest(dataConfig.build))
+        .pipe(gulp.dest(dataConfig.build));
 };
 
 module.watch = postConfig.src;

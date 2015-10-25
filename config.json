@@ -38,7 +38,9 @@
   },
   "vendor": {
     "require": [
-      "react/addons",
+      "react",
+      "react-dom",
+      "lodash",
       "marked",
       "highlight.js"
     ],

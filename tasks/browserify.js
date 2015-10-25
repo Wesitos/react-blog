@@ -26,9 +26,6 @@ module.exports = function (){
         }))
         .pipe(plugins.rename({extname: ".js"}))
         .pipe(gulp.dest(appConfig.build))
-        .pipe(plugins.uglify())
-        .pipe(plugins.rename({suffix:"-min"}))
-        .pipe(gulp.dest(appConfig.build))
         .on('error', gutil.log);
 };
 module.exports.watch = Path.normalize(appConfig.watch);

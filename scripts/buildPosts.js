@@ -12,7 +12,10 @@ function makeJson(dataDict, relative) {
     var postId = [nameParams[0],(nameParams.length<3)?1:nameParams[1]].join(":");
     var autor = relative.split(Path.sep)[0];
     var titulo = (dataDict.titulo || nameParams[nameParams.length-1].replace(".md", "").replace(/-/g, " ")).toLowerCase();
-    var path = [autor, fecha.replace(/-/g,"/"), titulo.replace(/ /g,"-").replace(/$/, ".json")].join("/");
+    var path = ["autor",
+                autor,
+                fecha.replace(/-/g,"/"),
+                titulo.replace(/ /g,"-").replace(/$/, ".json")].join("/");
     var obj = {
         post: {
             meta: {
