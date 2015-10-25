@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var buildPosts = require('../scripts/buildPosts.js');
 var plugins = require('gulp-load-plugins')();
 var postConfig = require('../config.json').blog.post;
-var dataConfig = require('../config.json').path.data;
+var dataConfig = require('../config.json').data;
 
 module.exports = function(){
     var makePostList = plugins.jsoncombine("index.json", function(data){

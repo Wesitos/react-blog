@@ -2,12 +2,13 @@
 
 var renderPages = require('../scripts/render.js');
 var gutil = require('gulp-util');
-var dataConfig = require('../config.json').path.data;
+var dataConfig = require('../config.json').data;
 var Path = require('path');
 
 module.exports =  function(done){
     renderPages(function(origin, dest){
-        gutil.log("Render", origin, ">>", dest);
+        gutil.log("Render  ", origin);
+        gutil.log("Rendered", dest);
     }, done);
 };
 module.exports.dependencies = ['posts'];
