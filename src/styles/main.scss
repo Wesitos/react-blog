@@ -2,8 +2,56 @@
 @import 'post';
 @import 'highlight';
 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+h1,h2,h3,h4,h5,h6,th{
+    font-family: 'Droid Serif', serif;
+    font-weight: 400;
+    margin-bottom: 1em;
+    line-height: 1.4em;
+}
+
+h1{
+    font-size: 3em;
+    margin:0;
+}
+
+h2{
+    font-size:1.5em;
+}
+
+h3{
+    font-size: 1.625em;
+}
+
+p {
+    font-family: 'Roboto', sans;
+    font-size: 1em;
+    line-height: 1.625;
+    margin: 0 0 1.625em 0;
+}
+
 body {
-    font-size: 20px;
+    font-size: 16pt;
     font-weight: 200;
     line-height: 1.46em;
     color: #333;
@@ -31,6 +79,7 @@ hr {
 #blogHeader {
     margin: auto;
     padding: 30px 50px 10px;
+    text-align: center;
 }
 
 #blogPostList {
@@ -48,6 +97,11 @@ hr {
 
 .blogPostHeader {
     font-size: 18px;
+}
+
+.postSubHeader{
+    line-height: 2.6;
+    font-size: 0.625em;
 }
 
 .blogPostContent {
