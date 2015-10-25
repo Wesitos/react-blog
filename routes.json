@@ -1,16 +1,16 @@
 {
-    "routes":[
-        {
-            "data": "index.json",
-            "route": "/",
-            "html": "common.html",
-            "app": "index"
-        },
-        {
-            "data": "*/**/*.json",
-            "route": "/",
-            "html": "common.html",
-            "app": "index"
-        }
-    ]
+  "routes":[
+    {
+      "data": "index.json",
+      "route": "/",
+      "html": "common.html",
+      "app": "index"
+    },
+    {
+      "data": "*/**/*.json",
+      "route": "/",
+      "html": "common.html",
+      "app": "index"
+    }
+  ]
 }
