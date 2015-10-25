@@ -1,7 +1,7 @@
 React-blog
 ============
-[![Dependency Status](https://david-dm.org/wesitos/react-init.svg)](https://david-dm.org/wesitos/react-init)
-[![devDependency Status](https://david-dm.org/wesitos/react-init/dev-status.svg)](https://david-dm.org/wesitos/react-init#info=devDependencies)
+[![Dependency Status](https://david-dm.org/wesitos/react-blog.png)](https://david-dm.org/wesitos/react-blog)
+[![devDependency Status](https://david-dm.org/wesitos/react-blog/dev-status.png)](https://david-dm.org/wesitos/react-blog#info=devDependencies)
 Blog estatico construido con react.
 ### Estructura de carpetas
     Blog
