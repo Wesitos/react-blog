@@ -16,7 +16,7 @@ module.exports = function (){
             browserify(file.path)
             .external(config.vendor.require)
                 .bundle(function(err, res){
-                    gutil.log('browserify', file.relative)
+                    gutil.log('browserify', file.relative);
                     if(file.isBuffer())
                         file.contents = res;
                     cb(null, file);});
@@ -28,5 +28,5 @@ module.exports = function (){
         .pipe(gulp.dest(appConfig.build))
         .on('error', gutil.log);
 };
-module.exports.dependencies = ['vendor']
-module.exports.watch = Path.join(appConfig.src, "**/*.js?")
+module.exports.dependencies = ['vendor'];
+module.exports.watch = Path.join(appConfig.src, "**/*.jsx?");
