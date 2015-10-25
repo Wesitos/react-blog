@@ -8,10 +8,13 @@ var browserify = require('browserify');
 var Path = require('path');
 
 var config = require("../config.json");
-var appConfig = config.path.reactApp;
+
+var appConfig = config.reactApp;
+var browserifyGlob = Path.join(appConfig.src, "**",
+                               ["*", appConfig.extname].join("."));
 
 module.exports = function (){
-    return gulp.src(Path.join(appConfig.src, "**/*.jsx"))
+    return gulp.src(browserifyGlob)
         .pipe(through.obj(function( file, enc, cb) {
             browserify(file.path)
             .external(config.vendor.require)
@@ -28,5 +31,4 @@ module.exports = function (){
         .pipe(gulp.dest(appConfig.build))
         .on('error', gutil.log);
 };
-module.exports.dependencies = ['vendor'];
-module.exports.watch = Path.join(appConfig.src, "**/*.jsx?");
+module.exports.watch = Path.normalize(appConfig.watch);

@@ -1,24 +1,29 @@
-react-blog
+React-blog
 ============
+[![Dependency Status](https://david-dm.org/wesitos/react-init.svg)](https://david-dm.org/wesitos/react-init)
+[![devDependency Status](https://david-dm.org/wesitos/react-init/dev-status.svg)](https://david-dm.org/wesitos/react-init#info=devDependencies)
 Blog estatico construido con react.
 ### Estructura de carpetas
-    Blag
-    ├── build : Raiz de los archivos servidos
-    ├── static
-    │   │   ├── css
-    │   │   └── js
-    └── src
-        ├── app : Scripts principales de cada pagina (jsx)
-        ├── component : Componentes de react (jsx)
-        ├── css
-        └── html
+    Blog
+    ├── build : Carpeta que se sirve
+    │   └── static: CSS y Javascript compilados para navegador (creado al construir)
+    │       └── css
+    │       └── js  : Apps de react compilados
+    ├── src
+    │   ├── app : Scripts principales de cada pagina (jsx)
+    │   ├── component : Componentes de react (jsx)
+    │   ├── html: html estatico, (se copia a "build/")
+    │   └── styles
+    └── tasks : Scripts de gulp para automatizacion
 ### JSX
-Un componente de react por archivo en `src/component`. Los componentes se referenciaran entre si utilizando `require` (CommonJS). Ejemplo:
+Un componente de react por archivo en `src/component`. Los componentes se referenciaran entre si utilizando `require` (CommonJS) o su equivalente en ES6 `import`. Ejemplo:
+
 ``` js
     /*Archivo: src/component/Foo.jsx */
     
     // Utilizamos el componente Faa que se encuentra en la misma carpeta
-    var Faa = require("./Faa.jsx");
+    import React from "react";  //var React = require("react");
+    import Faa from "./Faa.jsx"; //var Faa = require("./Faa.jsx");
     
     var Foo = React.createClass({
         render: function(){
@@ -29,6 +34,7 @@ Un componente de react por archivo en `src/component`. Los componentes se refere
        para que pueda ser utilizado */
     module.exports = Foo;
 ```
+
 Los scripts en App deben encargarse del renderizado de la pagina cuando se ejecuten en el cliente.
 Esto incluye descargar la data necesaria para el renderizado.
 Al ejecutarse en el servidor, deben exportar una funcion que reciba las propiedades del componente
@@ -61,6 +67,7 @@ y devuelva el componente renderizado en una cadena.
 ```
 Utilizamos Plates.js para inyectar el componente renderizado en el documento html ademas
 de incluir el script que manejara las actualizaciones en el cliente.
+
 ``` html
 <!-- Archivo: src/html/index.html -->
 <!DOCTYPE html>
@@ -83,11 +90,15 @@ Para construir.
 ``` bash
 $ npm run build
 ```
-Para construir continuamente
+Para construir continuamente.
 ``` bash
 $ npm run dev
 ```
-Para ejecutar
+Para construir y minimizar.
+``` bash
+$ npm run deploy
+```
+Para ejecutar un servidor estatico.
 ``` bash
 $ node app.js
 ```
