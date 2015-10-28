@@ -27,7 +27,7 @@ var Post = React.createClass({
         return (
             <article className="blogPost">
                 <PostHeader {...meta}/>
-                <PostContent content={content} resumido={resumido}/>
+                <PostContent meta={meta} content={content} resumido={resumido}/>
                 <hr/>
             </article>
         );

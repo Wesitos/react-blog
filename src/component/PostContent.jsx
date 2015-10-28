@@ -3,23 +3,9 @@ import React from "react";
 
 import VerMasButton from "./VerMasButton.jsx";
 
-import marked from"marked";
+import MarkdownIt from 'markdown-it';
+import ReplaceLink from 'markdown-it-replace-link';
 import hljs from "highlight.js";
-
-marked.setOptions({
-    renderer: new marked.Renderer(),
-    gfm: true,
-    tables: true,
-    breaks: true,
-    pedantic: false,
-    sanitize: true,
-    smartLists: true,
-    smartypants: false,
-    highlight: function (code, lang) {
-        var out = hljs.highlight(lang, code);
-        return out.value;
-    }
-});
 
 var PostContent = React.createClass({
     getDefaultProps: function(){
@@ -41,7 +27,32 @@ var PostContent = React.createClass({
 
     componentWillMount: function(){
         var content = this.props.content;
-        this.compiledText = marked(content);
+        var meta = this.props.meta;
+        var assetsDir = ["","assets", meta.autor, ""].join("/");
+        var MdRenderer= new MarkdownIt({
+            html: false,
+            breaks: false,
+            linkify: true,
+            highlight: function (str, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return hljs.highlight(lang, str).value;
+                    } catch (__) {}
+                }
+
+                try {
+                    return hljs.highlightAuto(str).value;
+                } catch (__) {}
+
+                return '';
+            },
+            replaceLink: function (link, env) {
+                // Si es un link relativo hacia "assets/", 
+                // lo manda a la carpeta de assets del usuario
+                return link.replace(/^assets\//, assetsDir);
+            }
+        }).use(ReplaceLink);
+        this.compiledText = MdRenderer.render(content);
     },
     render: function(){
         var postText = this.compiledText;
@@ -59,8 +70,8 @@ var PostContent = React.createClass({
                 className="blogPostText"
                 ref="post"
                 dangerouslySetInnerHTML={
-                {__html:acortarTexto?postText.split("<p>").slice(0,2).join("<p>"):postText}}
-                >
+                                         {__html:acortarTexto?postText.split("<p>").slice(0,2).join("<p>"):postText}}
+            >
             </article>
         );
         var Boton = (

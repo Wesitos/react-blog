@@ -28,7 +28,7 @@
   "blog":{
     "autor": {
       "src": "./data/**/autor.json",
-      "build": "./build/autores.json"
+      "build": "./build/autor/index.json"
     },
     "post":{
       "src": "./data/*/posts/**/*.md",
