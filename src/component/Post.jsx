@@ -5,6 +5,16 @@ import PostHeader from './PostHeader.jsx';
 import PostContent from './PostContent.jsx';
 
 var Post = React.createClass({
+    propTypes: {
+        meta: React.PropTypes.shape({
+            id: React.PropTypes.string.isRequired,
+            fecha: React.PropTypes.string.isRequired,
+            autor: React.PropTypes.string.isRequired,
+            titulo: React.PropTypes.string.isRequired,
+            url: React.PropTypes.string.isRequired,
+        }),
+        content: React.PropTypes.string.isRequired,
+    },
     getDefaultProps: function(){
         return{
             resumido: true
