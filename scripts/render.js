@@ -20,7 +20,7 @@ var renderPage = function(data, html, appName){
     var Component = require(["../src/app",appName+".jsx"].join(Path.sep));
     var renderedComponent = ReactDOMServer.renderToString(cloneElement(Component, data));
     var platesData = {
-        script: ["/static/js/",appName,"-min.js"].join("")
+        script: ["/static/js/",appName, ".js"].join("")
     };
     var map = Plates.Map();
     map.where('id').is("app-container").append(renderedComponent);
