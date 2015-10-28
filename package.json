@@ -24,7 +24,6 @@
     "lodash": "^3.10.1",
     "markdown-it": "^5.0.0",
     "markdown-it-replace-link": "^1.0.0",
-    "marked": "^0.3.3",
     "mkdirp": "^0.5.1",
     "plates": "^0.4.11",
     "react": "^0.14.0",
