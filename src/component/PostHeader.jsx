@@ -20,7 +20,10 @@ var PostHeader = React.createClass({
             <header className="blogPostHeader">
                 <a ref="postLink"
                    className="postName"
-                   href={postUrl} onClick={this.linkOnClickHandler}><h3>{titulo}</h3></a>
+                   href={postUrl}
+                   onClick={this.linkOnClickHandler}>
+                    <h1>{titulo}</h1>
+                </a>
                 <p className="postSubHeader">
                     <span>{"por "}</span>
                     <AuthorLabel autor={autor}/>

@@ -7,7 +7,7 @@ var BlogHeader = React.createClass({
         var subtitulo = this.props.subtitulo;
         return(
             <header id="blogHeader">
-                <a href="/"><h1>{titulo}</h1></a>
+                <a href="/">{titulo}</a>
                 <h3>{subtitulo}</h3>
             </header>
         );
