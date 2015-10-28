@@ -18,29 +18,18 @@ time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
 }
 
 h1,h2,h3,h4,h5,h6,th{
     font-family: 'Droid Serif', serif;
     font-weight: 400;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     line-height: 1.4em;
-}
-
-h1{
-    font-size: 3em;
-    margin:0;
 }
 
 h2{
     font-size:1.5em;
-}
-
-h3{
-    font-size: 1.625em;
 }
 
 p {
@@ -80,6 +69,10 @@ hr {
     margin: auto;
     padding: 30px 50px 10px;
     text-align: center;
+    a{
+        font-size: 2em;
+
+    }
 }
 
 #blogPostList {
@@ -114,7 +107,6 @@ hr {
 
 @media screen and (max-width: 800px) {
     #blogPostList {
-        box-shadow: none;
         width: auto;
         margin-left: 0px;
         margin-right: 0px;
@@ -126,7 +118,7 @@ hr {
         padding: 10px;
     }
     body {
-        font-size: 16px;
+        font-size: 16pt;
         margin: 0 0 0 0;
         line-height: 1.4em;
     }
